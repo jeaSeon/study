@@ -24,6 +24,16 @@
 		pstmt.setString(3, custName);
 		pstmt.setString(4, phone);
 		pstmt.executeUpdate();
+		%>
+		<script>
+		alert("회원가입 완료")
+		</script>
+		로그인 해주십시오.
+		<input type="button" onclick="location.href='http://localhost:8800/test/exam/logForm.jsp'" value="로그인"><%
+		
+	}catch (SQLException e) {
+			  out.println("중복된 아이디입니다.");
+			  e.printStackTrace();
 		
 	}finally{
 		if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
@@ -39,11 +49,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-alert("회원가입 완료")
-</script>
-로그인 해주십시오.
-<input type="button" onclick="location.href='http://localhost:8800/test/exam/logForm.jsp'" value="로그인">
+
 <input type="button" onclick="location.href='http://localhost:8800/test/exam/first.jsp'" value="처음으로">
 </body>
 </html>

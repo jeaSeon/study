@@ -28,8 +28,8 @@ try{
 		if(custId.equals("master")){
 			%><br><hr><input type="button" onclick="location.href='http://localhost:8800/test/exam/insertForm.jsp'" value="상품등록"> 
 			<input type="button" onclick="location.href='http://localhost:8800/test/exam/select.jsp'" value="제품조회">
-<input type="button" onclick="location.href='http://localhost:8800/test/exam/updateForm.jsp'" value="제품수정">
-<input type="button" onclick="location.href='http://localhost:8800/test/exam/deleteForm.jsp'" value="제품삭제"><%
+			<input type="button" onclick="location.href='http://localhost:8800/test/exam/updateForm.jsp'" value="제품수정">
+			<input type="button" onclick="location.href='http://localhost:8800/test/exam/deleteForm.jsp'" value="제품삭제"><%
 		}else{
 			%><br><hr><input type="button" onclick="location.href='http://localhost:8800/test/exam/createMem/shopForm.jsp'" value="구매하기"><%
 		}
