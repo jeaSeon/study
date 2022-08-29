@@ -14,12 +14,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityBoardConfig extends WebSecurityConfigurerAdapter{
 	//WebSecurityConfigurerAdapter 상속
 	
+	//비밀번호 암호화
 	@Bean
 	public BCryptPasswordEncoder encodePwd() {
 		return new BCryptPasswordEncoder();
 	}
 	
-	//스프링 시큐리티 법칙
+	//스프링 시큐리티
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf() //csrf 보안설정을 비활성화
@@ -31,8 +32,8 @@ public class SecurityBoardConfig extends WebSecurityConfigurerAdapter{
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()
-			.loginPage("/loginForm")	//아하아하 로그아웃하면 로그인폼 나오잖아? 그거 내가 만든 여기서 해라!! 
+			.loginPage("/loginForm")	//로그인폼
 			.loginProcessingUrl("/login")
-			.defaultSuccessUrl("/list");	//로그인 완료되면 여기로~~!! 
+			.defaultSuccessUrl("/list");	//로그인 성공하면 이동하는 페이지.
 	}
 }

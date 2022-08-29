@@ -15,7 +15,6 @@ public class PrincipalDetails implements UserDetails{
 		this.user=user;
 	}
 	
-	//얘를 사용할겨.
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collect=new ArrayList<>();

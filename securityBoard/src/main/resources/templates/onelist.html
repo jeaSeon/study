@@ -49,6 +49,7 @@
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
                 </br>
+     
 </br>
 
     <div class="container">
@@ -95,7 +96,7 @@
                 <td></td>
             </tr>
         </table>
-        <div class="pull-left">
+        <div align="right" class="pull-left" align="right">
             <a href="/list" class="btn btn-default">목록으로</a>
         </div>
         <div class="pull-right">
@@ -188,8 +189,8 @@
                    });
         });
     </script>
+    
    <script th:if="${board?.user.id}==${users.id} or ${users.roleType}==ROLE_ADMIN or ${users.roleType}== ROLE_MANAGER">
-
         $('#update').click(function () {
         	var id=$('#board_idx').val()
         	location.href="/test/"+id

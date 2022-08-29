@@ -50,10 +50,7 @@
                 th:text="${board?.content}"></textarea><span class="help-block"></span>
                 </td>
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
+
         </table>
         <div class="pull-left">
             <a href="/list" class="btn btn-default">목록으로</a>
@@ -76,16 +73,16 @@
     <script th:if="!${board?.id}">
         $('#insert').click(function () {
         	
-        	/* JSON.stringify!! 중요쓰. 자바 스크립트 오브젝트를 제이슨으로 바꿔줌. 
-        	제이슨으로 날려야. 컨트롤러에서 제이슨을 받을 수 있어. 이러면 @RequestBody로 받아.
-        	저거 안쓰면 객체임...*/
+        	/* JSON.stringify-->자바 스크립트 오브젝트를 제이슨으로 바꿔준다. 
+        	컨트롤러에서 @RequestBody로 제이슨을 받는다.
+        	안쓰면 객체임...*/
             var jsonData = JSON.stringify({
                 title: $('#board_title').val(),
                 subTitle: $('#board_sub_title').val(),
                 content: $('#board_content').val().replace(/\n/g,"<br>"),
                 boardType: $('#board_type option:selected').val()
             });
-            alert(jsonData);
+            //alert(jsonData);
             $.ajax({
             	/* url에 http://localhost:9090/board/insert도 되고, 그냥 /board/insert도 됨. 
             	저 headers까지 날리는거... 
@@ -119,7 +116,7 @@
                 boardType: $('#board_type option:selected').val(),
                 createdDate: $('#board_create_date').val()
             });
-            alert(jsonData);
+            //alert(jsonData);
             $.ajax({
                        url: "/update/" + $('#board_idx').val(),
                        type: "PUT",

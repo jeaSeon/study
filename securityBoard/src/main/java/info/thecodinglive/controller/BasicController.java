@@ -75,10 +75,10 @@ public class BasicController {
 		Comment com=new Comment();
 		//System.out.println(securityRepository.findByUsername(principal.getName())); //로그인사람.
 		//System.out.println(boardService.findBoardById(boardId));//글번호
-		List<Comment> comList=commentRepository.findByBoardId((long)boardId);	//글번호에 맞는애들을 리스트 만들어서
+		List<Comment> comList=commentRepository.findByBoardId((long)boardId);	//글번호에 맞는 댓글 리스트 생성
 		Users users=securityRepository.findByUsername(principal.getName());
 		//System.out.println(users.toString());
-		model.addAttribute("comList",comList);		//속성에 넣어서 뿌려줌.
+		model.addAttribute("comList",comList);		//댓글리스트 모델속성에 추가.
 		model.addAttribute("users",users);
 		return "showComment";
 	}
@@ -93,8 +93,8 @@ public class BasicController {
 		//System.out.println(comment);	//코멘트
 		//System.out.println(boardId);	//글번호
 		Comment com=new Comment();
-		System.out.println(securityRepository.findByUsername(principal.getName())); //로그인사람.
-		//System.out.println(boardService.findBoardById(boardId));//글번호
+		//System.out.println(securityRepository.findByUsername(principal.getName())); //로그인사람.
+		//System.out.println(boardService.findBoardById(boardId));//글번호에 일치하는 게시글
 		com.setComment(comment);
 		com.setBoard(boardService.findBoardById(boardId));
 		com.setUsers(securityRepository.findByUsername(principal.getName()));
@@ -123,7 +123,6 @@ public class BasicController {
 		model.addAttribute("comList",comList);
 		model.addAttribute("users",users);
 		//ResponseEntity<?> //return new ResponseEntity<>("{}",HttpStatus.OK);
-		
 		return "showComment";
 	}
 	
@@ -218,7 +217,7 @@ public class BasicController {
 	}
 	
 	
-	//찐 게시글 수정
+	//게시글 수정
 	@RequestMapping(value="/update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Board> updateBoard(@PathVariable Long id, @RequestBody Board upBoard){
 		Board board=boardService.findBoardById(id);
