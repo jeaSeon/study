@@ -48,7 +48,7 @@ public class BasicController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	//게시글 서비스. 
+	//게시글 서비스
 	@Autowired
 	BoardService  boardService;
 	
