@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>Insert title here</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Resume - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <script th:src="@{/js/jquery.min.js}"></script>
+	    <script type="text/javascript">
+	    	$(document).ready(function(){
+	    		first();
+	    	});
+	    
+	    </script>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Hello</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/cat-g1a86f5615_1920.jpg" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="/first" class="nav-link js-scroll-trigger">Main</a></li>
+                	<li class="nav-item"><a href="/loginForm" class="nav-link js-scroll-trigger">로그인</a></li>
+                	<li class="nav-item"><a href="/joinForm" class="nav-link js-scroll-trigger">회원가입</a></li>
+                	<li class="nav-item"><a href="/delUserForm" class="nav-link js-scroll-trigger">회원탈퇴</a></li>
+                	<li class="nav-item"><a href="/list" class="nav-link js-scroll-trigger">글목록</a></li>
+                	
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        
+        <div class="container-fluid p-0">
+            <!-- About-->
+            <section class="resume-section" id="about">
+                <div class="resume-section-content">
+                </br>
+</br>
+
+    <div class="container">
+        <div class="page-header">
+            <h2>게시글 조회</h2>
+        </div>
+        <br/>
+        <input id="board_idx" type="hidden" th:value="${board?.id}"/>
+        <input id="board_create_date" type="hidden" th:value="${board?.wdate}"/>
+        <table class="table">
+            <tr>
+                <th style="padding:13px 0 0 15px">게시판 선택</th>
+                <td>
+                    <div class="pull-left">
+                        <span th:text=${board?.boardType.value}></span><br/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding:13px 0 0 15px;">생성날짜</th>
+                <td> <span th:text=${board?.wdate}></span><br/></td>
+            </tr>
+            <tr>
+                <th style="padding:13px 0 0 15px;">아이디</th>
+                <td> <span th:text=${board?.user.username}></span><br/></td>
+            </tr>
+            <tr>
+                <th style="padding:13px 0 0 15px;">제목</th>
+                <td><span th:text=${board?.title}></span><br/></td>
+            </tr>
+            <tr>
+                <th style="padding:13px 0 0 15px;">부제목</th>
+                <td><span th:text=${board?.subTitle}></span><br/></td>
+            </tr>
+            <tr>
+                <th style="padding:13px 0 0 15px;">내용</th>
+                <!-- <td><span th:text=${board?.content}></pre><br/> </td> -->
+                <td>[(${board?.content})]</td>
+
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="pull-left">
+            <a href="/list" class="btn btn-default">목록으로</a>
+        </div>
+        <div class="pull-right">
+        		<!-- ! 되어있는건 노출.. 그래서 저장만 보여 수정,삭제는 안보임. 
+        		!${board?.id} 아이디가 없으면 insert
+        		${board?.id} 아이디가 있으니까 업데이트, 딜리트 -->
+	<!-- 게시글 작성자만 보이게..!!! -->
+		
+            <button th:if="!${board?.id}" type="button" class="btn btn-primary" id="insert">저장</button>
+            <button th:if="${board?.user.id}==${users.id} or ${users.roleType}==ROLE_ADMIN or ${users.roleType}== ROLE_MANAGER"  type="button" class="btn btn-info" id="update">수정</button>
+            <button th:if="${board?.user.id}==${users.id} or ${users.roleType}==ROLE_ADMIN or ${users.roleType}== ROLE_MANAGER"  type="button" class="btn btn-danger" id="delete">삭제</button>
+        </div>
+        
+        <br/>
+        <br/>
+        <hr/>
+      <div class="card">    
+    	<div class="card-header bi bi-chat-right-dots"> 댓글을 입력하여 주십시오</div> 
+      
+    	   <form>   
+    	       <input type="hidden" id="usersId" th:value="${users?.id}">    
+    	        
+    	           <div class="card-body">       
+    	               <textarea id="comment" class="form-control" rows="4" placeholder="댓글을 입력하여 주십시오"></textarea> 
+    	           </div>
+    	           <br/>     
+    	           <div class="card-footer">        
+    	               <button type="button" id="btn-comment-save"class="btn btn-outline-primary bi bi-pencil-square"> 등록</button> 
+    	           </div> 
+					<br/>
+    	           <div class="card-body" style="font-size: small"><a href="/loginForm">로그인</a>을 하시면 댓글을 등록할 수 있습니다.</div>   
+
+    	    </form>
+    	</div>
+    	
+    	<hr/>
+    	
+    	<div id="show">
+    	</div>
+    	
+    </div>
+    
+    <hr>
+    <!-- 댓글 추가 -->
+    <br/>
+
+
+    <div>
+    
+    </div>
+
+
+	<!-- 자바스크립트 동작, 제이쿼리..! -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:if="!${board?.id}">
+        $('#insert').click(function () {
+        	
+        	/* JSON.stringify!! 중요쓰. 자바 스크립트 오브젝트를 제이슨으로 바꿔줌. 
+        	제이슨으로 날려야. 컨트롤러에서 제이슨을 받을 수 있어. 이러면 @RequestBody로 받아.
+        	저거 안쓰면 객체임...*/
+            var jsonData = JSON.stringify({
+            	
+                title: $('#board_title').val(),
+                subTitle: $('#board_sub_title').val(),
+                content: $('#board_content').val(),
+                boardType: $('#board_type option:selected').val()
+            });
+            alert(jsonData);
+            $.ajax({
+            	/* url에 http://localhost:9090/board/insert도 되고, 그냥 /board/insert도 됨. 
+            	저 headers까지 날리는거... 
+            	dataType : 응답받는 타입 : json이고, success면 200 뭐 이런거*/
+                       url: "/insert",
+                       type: "POST",
+                       data: jsonData,
+                       contentType: "application/json",
+                       headers: {
+                           "Authorization": "Basic " + btoa("havi" + ":" + "test")
+                       },
+                       dataType: "json",
+                           success: function () {
+                               alert('저장 성공!');
+                               location.href = '/list';
+                               /*  /board/aaa 는 url 경로여 */
+                       },
+                       error: function () {
+                           alert('저장 실패!');
+                           location.href = '/list';
+                       }
+                   });
+        });
+    </script>
+   <script th:if="${board?.user.id}==${users.id} or ${users.roleType}==ROLE_ADMIN or ${users.roleType}== ROLE_MANAGER">
+
+        $('#update').click(function () {
+        	var id=$('#board_idx').val()
+        	location.href="/test/"+id
+        });
+ 		
+        $('#delete').click(function () {
+            $.ajax({
+                       url: "/delete/" + $('#board_idx').val(),
+                       type: "DELETE",
+                       success: function () {
+                           alert('삭제 성공!');
+                           location.href = '/list';
+                           /* 성공하면  /board/list로 가라 */
+                       },
+                       error: function () {
+                           alert('삭제 실패!');
+                       }
+                   });
+        });
+       </script>
+       
+       <!-- 기존에 있는 페이지 번호 목록들 가져오기 메소드. -->
+       <script>
+       		function first(){
+       			//alert('test...');
+       			var com={boardId:$('#board_idx').val()};
+       			$.ajax({
+         			url:"/sh",
+         			data:com,
+         			type:"post",
+         			success:function(data){
+        				//alert(data);		
+        				$('#show').html(data);
+        			}
+            });
+       			
+       		}
+       
+		/* 댓글 등록. */       
+            $('#btn-comment-save').click(function(){
+
+            	var com={comment:$('#comment').val(),
+		  			 boardId:$('#board_idx').val()};
+            	//location.href='/show/'
+         		//var cntv=$('#cnt').val();
+         		//alert(namev+pricev+cntv);
+         		//var pro={name:namev,
+         			//	price:pricev,
+         				// cnt:cntv};
+         		//alert("test...");
+     		//alert(com);
+         		$.ajax({
+         			url:"/show",
+         			data:com,		//날리면 컨트롤러로 들어가는거야.
+         			type:"post",
+         			success:function(data){
+        				//alert(data);
+        				alert('등록 성공'); 
+        				 $('#show').html(data);
+        			},
+                    error: function () {
+                        alert('등록 실패!');
+                    }
+            }); 
+        });
+    </script>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
