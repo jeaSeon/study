@@ -1,5 +1,6 @@
 package info.thecodinglive.repository;
 
+//boardrepository이다. (게시글)
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;

@@ -18,6 +18,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//댓글 엔티티이다.
 @Data
 @NoArgsConstructor
 @Entity
@@ -35,11 +36,11 @@ public class Comment {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="board_id")
-	private Board board;	//게시판정보
+	private Board board;	//게시판정보 - 게시판의 id넘버를 받아온다.
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="users_id")
-	private Users users; //회원정보
+	private Users users; //회원정보 - 글쓴 사람의 회원정보 id를 받아온다.
 	
 	@Builder
 	public Comment(String comment, Date cdate, Board board,

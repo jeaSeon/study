@@ -11,6 +11,7 @@ import info.thecodinglive.model.Users;
 import info.thecodinglive.repository.BoardRepository;
 import info.thecodinglive.repository.SecurityUsersRepository;
 
+//게시글 서비스이다.
 @Service
 public class BoardService {
 

@@ -100,7 +100,7 @@ public class BasicController {
 		com.setUsers(securityRepository.findByUsername(principal.getName()));
 		commentRepository.save(com);
 		//System.out.println(com.toString());
-		List<Comment> comList=commentRepository.findByBoardId((long)boardId);	//글번호에 맞는애들을 리스트 만들어서
+		List<Comment> comList=commentRepository.findByBoardId((long)boardId);	//글번호에 맞는 댓글들 리스트로 만듬.
 		Users users=securityRepository.findByUsername(principal.getName());
 		//System.out.println(comList);
 		model.addAttribute("comList",comList);		//속성에 넣어서 뿌려줌.
@@ -127,7 +127,7 @@ public class BasicController {
 	}
 	
 	
-	//게시글 입력. 보드에 유저넘버 들어가게.
+	//게시글 입력. 보드에 유저넘버 들어감.
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public ResponseEntity<Board> Insert(@RequestBody Board board, Principal principal) {
 		//System.out.println("post 요청");
@@ -169,7 +169,7 @@ public class BasicController {
 	public String board(Model model, @RequestParam(value="id", defaultValue = "0") Long id,Principal principal) {
 		Board board=boardService.findBoardById(id);
 		//Users users=securityRepository.findByUsername(principal.getName());
-		if(principal==null) {	//로그인 안했으면 로그인쪽으로.
+		if(principal==null) {	//로그인 정보가 없으면 로그인화면으로 이동.
 			return "/loginForm";
 		}else {
 			Users users=securityRepository.findByUsername(principal.getName());
@@ -207,7 +207,7 @@ public class BasicController {
 	*/
 	
 	
-	//1개 게시글 보고, 수정으로 넘어가는 컨트롤러
+	//1개 게시글 보고, 수정페이지로 넘어감.
 	@RequestMapping(value="/test/{id}")
 	public String uptest(@PathVariable Long id,Model model) {
 		Board board=boardService.findBoardById(id);
@@ -226,7 +226,7 @@ public class BasicController {
 		board.setSubTitle(upBoard.getSubTitle());
 		board.setContent(upBoard.getContent());
 		boardService.save(board);
-		//System.out.println(board);	//잘 들어갔는지 확인.
+		//System.out.println(board);	//잘 들어갔는지 확인작업.
 		return new ResponseEntity<Board>(board,HttpStatus.OK);
 	}
 	
@@ -295,7 +295,7 @@ public class BasicController {
 	public String join(Users users) {
 		System.out.println(users.getUsername());
 		//System.out.println(securityRepository.findByUsername(users.getUsername()));
-		if(securityRepository.findByUsername(users.getUsername())==null) {
+		if(securityRepository.findByUsername(users.getUsername())==null) {	//입력한 아이디가 기존에 없다면.
 		System.out.println(users.toString());
 		users.setRoleType("ROLE_USER");
 		String rawPassword=users.getPassword();
@@ -324,7 +324,7 @@ public class BasicController {
 		//System.out.println(securityRepository.findByUsername(users.getUsername()));
 		Users user=securityRepository.findByUsername(users.getUsername());
 		//System.out.println(user.getPassword());
-		if(bCryptPasswordEncoder.matches(users.getPassword(), user.getPassword())) {
+		if(bCryptPasswordEncoder.matches(users.getPassword(), user.getPassword())) {	//암호화 된 비밀번호와 확인함.
 			commentRepository.deleteByUsersId(user.getId());
 			boardService.deleteByUserId(user.getId());
 			securityRepository.deleteById(user.getId());

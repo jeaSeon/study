@@ -28,6 +28,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//게시글 엔티티이다.
 @Data
 @NoArgsConstructor
 @Entity
@@ -40,14 +41,14 @@ public class Board implements Serializable {
 	private String title;		//제목
 	private String subTitle;	//부제목
 	private String content;		//내용
-	private int pageView;		//조회수...
+	private int pageView;		//조회수
 	
 	@Enumerated(EnumType.STRING)
 	private BoardType boardType;//게시판 타입(이넘)
 	
 	private Date wdate;			//날짜	
 	
-	@PrePersist	//->자동으로 넣어주는친구.
+	@PrePersist	//->Date 값을 자동으로 넣어준다. 
 	public void beforeCreate() { 
 		wdate=new Date();
 	}
@@ -55,9 +56,10 @@ public class Board implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="users_id")
 	@JsonIgnore
-	private Users user;			//회원정보?
+	private Users user;			//회원정보
  
 	//mappedBy="board",
+	//게시글과 댓글 사이에 참조키로 엮여져 있어서 그냥은 삭제가 안된다. --> cascade 사용
 	@OneToMany(mappedBy="board",fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JsonIgnore
 	private List<Comment> comments;

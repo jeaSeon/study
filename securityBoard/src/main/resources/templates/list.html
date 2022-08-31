@@ -51,7 +51,6 @@
         <th:block sec:authorize="isAuthenticated()">
         	<div align="right">
         		<h4><span sec:authentication="Principal.username"></span>님 환영합니다!</h4>
-        		<!-- <button onclick="location.href='/logout'">로그아웃</button> -->
         	</div>
         </th:block>	
         
@@ -98,6 +97,8 @@
         </div>
          <div align="right"><a href="/logout">LOGOUT</a></div>    
         <br/>
+        <!-- 네이게이션 페이지 중앙정렬. -->
+        <div style="display: flex; justify-content: center; align-items: center;">
         <!-- 페이지 네비게이션    
         ===><span th:text="${T(java.lang.Math).floor(7/2)}">123</span>
              -->
@@ -118,6 +119,7 @@
 			</ul>
 		</nav>
 		<!-- /Pagination -->
+		</div>
 </div>
  
 <br>

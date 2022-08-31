@@ -113,7 +113,9 @@
         <br/>
         <br/>
         <hr/>
-      <div class="card">    
+        
+    <!--  댓글 입력 -->
+      <div class="card">
     	<div class="card-header bi bi-chat-right-dots"> 댓글을 입력하여 주십시오</div> 
       
     	   <form>   
@@ -131,16 +133,17 @@
 
     	    </form>
     	</div>
-    	
     	<hr/>
     	
+    	
+    	<!-- 댓글 내용 노출 -->
     	<div id="show">
     	</div>
     	
     </div>
     
     <hr>
-    <!-- 댓글 추가 -->
+ 
     <br/>
 
 
@@ -154,9 +157,9 @@
     <script th:if="!${board?.id}">
         $('#insert').click(function () {
         	
-        	/* JSON.stringify!! 중요쓰. 자바 스크립트 오브젝트를 제이슨으로 바꿔줌. 
-        	제이슨으로 날려야. 컨트롤러에서 제이슨을 받을 수 있어. 이러면 @RequestBody로 받아.
-        	저거 안쓰면 객체임...*/
+        	/* JSON.stringify!! 자바 스크립트 오브젝트를 제이슨으로 바꿔준다.
+        	제이슨으로 날려야. 컨트롤러에서 제이슨을 받을 수 있고 컨트롤러에서 @RequestBody로 받는다.
+        	stringify를 안쓰면 객체다.*/
             var jsonData = JSON.stringify({
             	
                 title: $('#board_title').val(),
@@ -166,9 +169,6 @@
             });
             alert(jsonData);
             $.ajax({
-            	/* url에 http://localhost:9090/board/insert도 되고, 그냥 /board/insert도 됨. 
-            	저 headers까지 날리는거... 
-            	dataType : 응답받는 타입 : json이고, success면 200 뭐 이런거*/
                        url: "/insert",
                        type: "POST",
                        data: jsonData,
@@ -180,7 +180,6 @@
                            success: function () {
                                alert('저장 성공!');
                                location.href = '/list';
-                               /*  /board/aaa 는 url 경로여 */
                        },
                        error: function () {
                            alert('저장 실패!');
@@ -212,7 +211,7 @@
         });
        </script>
        
-       <!-- 기존에 있는 페이지 번호 목록들 가져오기 메소드. -->
+       <!-- 댓글 1. 게시글 클릭시 게시글에 맞는 댓글 리스트 가져오기. -->
        <script>
        		function first(){
        			//alert('test...');
@@ -229,7 +228,7 @@
        			
        		}
        
-		/* 댓글 등록. */       
+      // 댓글 2. 댓글 등록 클릭 시
             $('#btn-comment-save').click(function(){
 
             	var com={comment:$('#comment').val(),
@@ -241,7 +240,7 @@
          			//	price:pricev,
          				// cnt:cntv};
          		//alert("test...");
-     		//alert(com);
+     			//alert(com);
          		$.ajax({
          			url:"/show",
          			data:com,		//날리면 컨트롤러로 들어가는거야.

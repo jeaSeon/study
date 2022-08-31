@@ -1,5 +1,6 @@
 package info.thecodinglive.model;
 
+//게시글 타입으로 eunm사용
 public enum BoardType {
 	notice("공지사항"),
 	free("자유게시판"),

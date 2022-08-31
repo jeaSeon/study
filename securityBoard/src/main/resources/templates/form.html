@@ -56,9 +56,6 @@
             <a href="/list" class="btn btn-default">목록으로</a>
         </div>
         <div class="pull-right">
-        		<!-- ! 되어있는건 노출.. 그래서 저장만 보여 수정,삭제는 안보임. 
-        		!${board?.id} 아이디가 없으면 insert
-        		${board?.id} 아이디가 있으니까 업데이트, 딜리트 -->
             <button th:if="!${board?.id}" type="button" class="btn btn-primary" id="insert">저장</button>
             <button th:if="${board?.id}" type="button" class="btn btn-info" id="update">수정</button>
             <button th:if="${board?.id}" type="button" class="btn btn-danger" id="delete">삭제</button>
@@ -73,9 +70,9 @@
     <script th:if="!${board?.id}">
         $('#insert').click(function () {
         	
-        	/* JSON.stringify-->자바 스크립트 오브젝트를 제이슨으로 바꿔준다. 
-        	컨트롤러에서 @RequestBody로 제이슨을 받는다.
-        	안쓰면 객체임...*/
+        	/* JSON.stringify!! 자바 스크립트 오브젝트를 제이슨으로 바꿔준다.
+        	제이슨으로 날려야. 컨트롤러에서 제이슨을 받을 수 있고 컨트롤러에서 @RequestBody로 받는다.
+        	stringify를 안쓰면 객체다.*/
             var jsonData = JSON.stringify({
                 title: $('#board_title').val(),
                 subTitle: $('#board_sub_title').val(),
@@ -84,9 +81,6 @@
             });
             //alert(jsonData);
             $.ajax({
-            	/* url에 http://localhost:9090/board/insert도 되고, 그냥 /board/insert도 됨. 
-            	저 headers까지 날리는거... 
-            	dataType : 응답받는 타입 : json이고, success면 200 뭐 이런거*/
                        url: "/insert",
                        type: "POST",
                        data: jsonData,
