@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
-
-<!-- 말바티스는 VO의 위치와 테이블 명 (알리아스)를 적는다. -->
-<configuration>
-    <typeAliases>
-		<typeAlias alias="sample" type="egovframework.sample.service.SampleVO"/>
-    </typeAliases>
-</configuration>
