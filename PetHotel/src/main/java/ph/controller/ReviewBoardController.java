@@ -5,17 +5,17 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ph.service.BoardService;
+import ph.service.ReviewBoardService;
 
 @Controller
-public class BoardController {
+public class ReviewBoardController {
 	
-	@Resource(name="boardService")
-	private BoardService boardService;
+	@Resource(name="reviewBoardService")
+	private ReviewBoardService boardService;
 	
 	@RequestMapping(value="/write.do")
 	public String write() {
-		return "writeForm";
+		return "ReviewBoard/ReviewWriteForm";
 	}
 
 	//test

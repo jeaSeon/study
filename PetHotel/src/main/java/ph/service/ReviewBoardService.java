@@ -1,6 +1,6 @@
 package ph.service;
 
-public interface BoardDAO {
+public interface ReviewBoardService {
 	
 	void insertBoard(BoardVO boardVo) throws Exception;
 

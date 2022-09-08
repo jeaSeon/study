@@ -4,15 +4,15 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ph.service.BoardDAO;
-import ph.service.BoardService;
+import ph.service.ReviewBoardDAO;
+import ph.service.ReviewBoardService;
 import ph.service.BoardVO;
 
-@Service("boardService")
-public class BoardServiceImpl implements BoardService{
+@Service("reviewBoardService")
+public class ReviewBoardServiceImpl implements ReviewBoardService{
 	
-	@Resource(name="boardDAOMybatis")
-	private BoardDAO boardDAO;
+	@Resource(name="reviewBoardDAOMybatis")
+	private ReviewBoardDAO boardDAO;
 
 	@Override
 	public void insertBoard(BoardVO boardVo) throws Exception {
