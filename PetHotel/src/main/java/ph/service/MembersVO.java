@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class MembersVO {	
+public class MembersVO {
 	private String memberId;
 	private String memberPassword;
 	private String memberCheckPassword;
