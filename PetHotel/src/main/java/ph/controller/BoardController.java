@@ -18,4 +18,5 @@ public class BoardController {
 		return "writeForm";
 	}
 
+	//test
 }
