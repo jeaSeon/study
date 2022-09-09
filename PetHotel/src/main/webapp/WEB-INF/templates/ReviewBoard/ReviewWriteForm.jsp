@@ -5,24 +5,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	function insert() {
+		alert("하이")
+		var titleB = $('#title').val()
+		var contentB = $('#content').val();
+		var boardTypeB = $('#boardType').val();
+		$.ajax({
+			url: 'insertReviewboard.do',
+			type: 'GET',
+			data: {
+				title:titleB,
+				content:contentB,
+				boardType:boardTypeB,
+				},
+			datatype: 'JSON',
+			success: function (data) {
+				if(data == "no") {
+					alert("로그인이 필요합니다.")
+					location.href='login.do'
+				} else {
+					alert("게시글 등록 성공")
+					location.href='list.do'
+				}
+			}
+		})			
+	}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
+<%
+	String userId = (String) session.getAttribute("SessionMemberId");
+	String userRole = (String) session.getAttribute("SessionRole");
+	if(userRole == null) {
+		userRole = "Visitor";
+	}
+	System.out.println(userRole);
+%>
+
 
  <div >
         <div >
             <h1>게시글 등록</h1>
         </div>
         <br/>
-        <input id="board_idx" type="hidden" />
-        <input id="board_create_date" type="hidden" />
+        <input id="boardNo" name="boardNo" type="hidden" />
+        <input id="wdate" name="wdate" type="hidden" />
         <table class="table">
             <tr>
                 <th style="padding:13px 0 0 15px">게시판 선택</th>
                 <td>
                     <div >
-                        <select  id="board_type">
-                            
+                        <select  id="boardType">
+                            <option value="후기게시판">후기게시판</option>
                         </select>
                     </div>
                 </td>
@@ -30,29 +67,25 @@
             <tr>
            		 <!-- ?의 의미는, 있으면 찍고 없으면 안찍고. -->
                 <th style="padding:13px 0 0 15px;">생성날짜</th>
-                <td><input type="text"readonly="readonly" /></td>
+                <td><input name="wdate" type="text"readonly="readonly" /></td>
             </tr>
             <tr>
                 <th style="padding:13px 0 0 15px;">제목</th>
-                <td><input id="board_title" type="text" /></td>
-            </tr>
-            <tr>
-                <th style="padding:13px 0 0 15px;">부제목</th>
-                <td><input id="board_sub_title" type="text" /></td>
+                <td><input id="title" type="text" /></td>
             </tr>
             <tr>
                 <th style="padding:13px 0 0 15px;">내용</th>
-                <td><textarea id="board_content" maxlength="140" rows="7" style="height: 200px;"
+                <td><textarea id="content" maxlength="140" rows="7" style="height: 200px;"
                 ></textarea>
                 </td>
             </tr>
 
         </table>
         <div >
-            <a href="/list" >목록으로</a>
+            <a href="reviewBoardlist.do" >목록으로</a>
         </div>
         <div >
-            <button  type="button" id="insertReview.do">저장</button>
+            <button  type="button" onclick="insert()" id="insert">저장</button>
             <button  type="button" id="update">수정</button>
             <button  type="button" id="delete">삭제</button>
         </div>

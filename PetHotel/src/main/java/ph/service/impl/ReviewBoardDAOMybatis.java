@@ -12,7 +12,7 @@ public class ReviewBoardDAOMybatis extends EgovAbstractMapper implements ReviewB
 	//글 삽입
 	@Override
 	public void insertBoard(BoardVO boardVO) throws Exception {
-		insert("insertBoard",boardVO);
+		insert("insertReviewBoard",boardVO);
 		
 	}
 

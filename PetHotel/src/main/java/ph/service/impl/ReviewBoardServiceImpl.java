@@ -16,7 +16,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 
 	@Override
 	public void insertBoard(BoardVO boardVo) throws Exception {
-		// TODO Auto-generated method stub
+		boardDAO.insertBoard(boardVo);
 		
 	}
 
