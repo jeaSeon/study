@@ -39,6 +39,7 @@
 <%
 	String userId = (String) session.getAttribute("SessionMemberId");
 	String userRole = (String) session.getAttribute("SessionRole");
+	String memberNickname = (String) session.getAttribute("SessionMemberNickname");
 	if(userRole == null) {
 		userRole = "Visitor";
 	}
@@ -49,6 +50,8 @@
  <div >
         <div >
             <h1>게시글 등록</h1>
+            ${SessionMemberId}
+            ${SessionMemberNickname}
         </div>
         <br/>
         <input id="boardNo" name="boardNo" type="hidden" />

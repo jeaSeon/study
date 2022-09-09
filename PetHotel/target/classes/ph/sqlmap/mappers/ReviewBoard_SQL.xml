@@ -15,10 +15,23 @@
 			<result property="reviewPicturePath" column="reviewPicturePath" />
 	</resultMap>
 		
-		
+	<!-- 글 삽입 -->
 	<insert id="insertReviewBoard">
-		INSERT INTO board(title, content, wdate, boardType, memberId) 
-		VALUES(#{title},#{content},NOW(),#{boardType}, #{memberId})
+		INSERT INTO board(title, content, wdate, boardType, memberId, memberNickname) 
+		VALUES(#{title},#{content},NOW(),#{boardType}, #{memberId}, #{memberNickname})
 	</insert>
+	
+	<select id="selectReviewList" resultMap="boardResult">
+		select boardNo, boardType, title, memberId, memberNickname, wdate
+		from board
+		order by boardNo desc
+	</select>
+	
+	
+	<select id="selectReview" resultMap="boardResult">
+		select boardType, wdate, memberId, memberNickname, title, content
+		FROM board
+		WHERE boardNo=#{boardNo}
+	</select>
 	
 </mapper>

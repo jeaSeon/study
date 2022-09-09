@@ -87,9 +87,12 @@ public class MembersController {
 		membersVo.setMemberId(memberId);
 		membersVo.setMemberPassword(memberPassword);
 		int result = service.loginMember(membersVo);
+		MembersVO mem=service.selectMember(memberId);
+		System.out.println("mem"+mem.toString());
 		if(result == 1) {
 			System.out.println("로그인 성공");
 			session.setAttribute("SessionMemberId", membersVo.getMemberId());
+			session.setAttribute("SessionMemberNickname", mem.getMemberNickname()); 
 		} else {
 			System.out.println("로그인 실패");
 		}
