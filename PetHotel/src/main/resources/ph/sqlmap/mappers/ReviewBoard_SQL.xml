@@ -24,6 +24,7 @@
 	<select id="selectReviewList" resultMap="boardResult">
 		select boardNo, boardType, title, memberId, memberNickname, wdate
 		from board
+		where boardType="후기게시판"
 		order by boardNo desc
 	</select>
 	

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +61,9 @@
 	System.out.println(userRole);
 %>
 
- ${SessionMemberId}
- ${userId}
+글쓴사람 ${reviewBoard.memberId}
+
+로그인한사람 ${memberId}
  
             <h2>후기게시판</h2>
         </div>
@@ -100,10 +101,13 @@
         <div><a href="reviewBoardlist.do" >목록으로</a></div>
         <div><a href="main.do" >첫화면</a></div>
         
-		<!-- 글쓴사람이 지울 수 있게.. 수정하기 -->
-        <div>
-            <input type="button" onclick="updateReview()" value="수정">
-            <input type="button" onclick="deleteReview()" value="삭제">
+		<c:if test="${reviewBoard.memberId==memberId}">
+		<div>
+            <input type="button" onclick="updateReview()" value="수정"/>
         </div>
+		</c:if>
+
+        
+
 </body>
 </html>

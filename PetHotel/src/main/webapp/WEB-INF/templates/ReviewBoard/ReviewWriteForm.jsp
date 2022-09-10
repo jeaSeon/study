@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,8 +72,7 @@
  <div >
         <div >
             <h1>게시글 등록</h1>
-            ${SessionMemberId}
-            ${SessionMemberNickname}
+            로그인 한 사람 : ${memberId}
         </div>
         <br/>
         <input id="boardNo" value="${reviewBoard.boardNo}" type="hidden" />
@@ -85,15 +84,11 @@
                     <div >
                         <select  id="boardType">
                             <option value="후기게시판">후기게시판</option>
+                            <option value="자유게시판">자유게시판</option>
                         </select>
                     </div>
                 </td>
             </tr>
-            <!-- 
-            <tr>
-                <th style="padding:13px 0 0 15px;">생성날짜</th>
-                <td><input name="wdate" type="text" readonly="readonly" /></td>
-            </tr> -->
             
             <tr>
                 <th style="padding:13px 0 0 15px;">제목</th>
@@ -105,16 +100,27 @@
                 >${reviewBoard.content}</textarea>
                 </td>
             </tr>
-
+			
         </table>
         <div >
             <a href="reviewBoardlist.do" >목록으로</a>
         </div>
-        <div >
+        
+        <!-- 수정에서 넘어오면 저장버튼 안보이게. -->
+        <c:if test="${reviewBoard.boardNo==null}">
+        <div>
             <button  type="button" onclick="insert()" id="insert">저장</button>
-            <button  type="button" onclick="update()" id="update">수정</button>
-            <button  type="button" id="delete">삭제</button>
-        </div>
+         </div>
+         </c:if>
+        
+        <c:if test="${reviewBoard.memberId==memberId}">
+	        <div>
+	            <button  type="button" onclick="update()" id="update">수정</button>
+	            <button  type="button" id="delete">삭제</button>
+	        </div>
+         </c:if>
+      
+   
     </div>
 </body>
 </html>

@@ -21,7 +21,7 @@
 		${SessionMemberId} 하이영
 		<a href="selectMember.do">개인정보조회</a>
 		<a href="logout.do">로그아웃</a>
-		<a href="write.do">글쓰기</a>
+		<a href="reviewBoardlist.do">후기게시판</a>
 <% } else {%>
 		비로그인입니다.
 		<a href="login.do">로그인</a>

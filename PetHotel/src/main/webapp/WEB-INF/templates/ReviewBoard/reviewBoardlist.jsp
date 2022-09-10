@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -9,11 +9,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-보드리스트~
+<%
+	String userId = (String) session.getAttribute("SessionMemberId");
+	String userRole = (String) session.getAttribute("SessionRole");
+	String memberNickname = (String) session.getAttribute("SessionMemberNickname");
+	if(userRole == null) {
+		userRole = "Visitor";
+	}
+	System.out.println(userRole);
+%>
+
+	<!-- 로그인하면, id보이게 노출. -->
+	<c:if test="${memberId!=null}">
+		<p>${memberId}님 안녕하세요</p>
+	</c:if>
 
   <div>
         <div >
-            <h2>게시글 목록</h2>
+            <h2>후기 게시글 목록</h2>
         </div>
         <br/>
         <br/>
@@ -47,7 +60,16 @@
         			</tbody>
         		</table>
         </div>
-         <div align="right"><a href="/logout">LOGOUT</a></div>    
+        
+        <!-- 로그인 하면 : 로그아웃페이지, 로그인 안하면 로그인페이지 노출 -->
+        <c:if test="${memberId!=null}">
+        	<div align="right"><a href="logout.do">LOGOUT</a></div>
+        </c:if>
+        <c:if test="${memberId==null}">
+        	<div align="right"><a href="login.do">LOGIN</a></div>
+        </c:if>
+        
+        
       <nav aria-label="Page navigation" style="text-align: center;">	
 			<div class="pagination" style="text-align: center">
 				<c:if test="${firstPage > pageList }">
@@ -63,7 +85,13 @@
 			</nav>	
 		</div>
 		
-		<input type="button" onclick="location.href='/PetHotel/write.do'" value="글쓰기">
+		<!-- 로그인했으면 글쓰기버튼 보이게 설정. -->
+		<c:if test="${memberId!=null}">
+			<input type="button" onclick="location.href='/PetHotel/write.do'" value="글쓰기">
+		</c:if>
+		
+		
+		<div><a href="main.do" >첫화면</a></div>
 </div>
 </body>
 </html>
