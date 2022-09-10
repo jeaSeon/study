@@ -21,6 +21,7 @@
 		VALUES(#{title},#{content},NOW(),#{boardType}, #{memberId}, #{memberNickname})
 	</insert>
 	
+	<!-- 글 리스트 조회 -->
 	<select id="selectReviewList" resultMap="boardResult">
 		select boardNo, boardType, title, memberId, memberNickname, wdate
 		from board
@@ -28,21 +29,60 @@
 		order by boardNo desc
 	</select>
 	
-	
+	<!-- 글 1개 조회 -->
 	<select id="selectReview" resultMap="boardResult">
 		select *
 		FROM board
 		WHERE boardNo=#{boardNo}
 	</select>
 	
+	<!-- 이전글 -->
+	<select id="beforeReview" resultMap="boardResult">
+	<![CDATA[
+			SELECT * 
+			FROM board 
+			where boardNo<#{boardNo} and boardType="후기게시판" 
+			ORDER BY boardNo DESC LIMIT 1
+		]]>
+	</select>
+	
+	<!-- 다음글 -->
+	<select id="afterReview" resultMap="boardResult">
+	<![CDATA[
+			SELECT * 
+			FROM board 
+			where boardNo>#{boardNo} and boardType="후기게시판" 
+			ORDER BY boardNo LIMIT 1
+		]]>
+	</select>
+	
+	<!-- 최대값 -->
+	<select id="maxReview" resultType="int">
+		<![CDATA[
+			SELECT max(boardNo) FROM board WHERE boardType="후기게시판"
+		]]>
+	</select>
+	
+	<!-- 최소값 -->
+	<select id="minReview" resultType="int">
+		<![CDATA[
+			SELECT min(boardNo) FROM board WHERE boardType="후기게시판"
+		]]>
+	</select>
+	
+	
+	<!-- 삭제 -->
 	<delete id="deleteReview">
 		DELETE from board
 		WHERE boardNo=#{boardNo}
 	</delete>
 	
-	
+	<!-- 수정 -->
 	<update id="updateReview">
 		UPDATE board SET title=#{title}, content=#{content} 
 		WHERE boardNo=#{boardNo}
 	</update>
+	
+
+
 </mapper>

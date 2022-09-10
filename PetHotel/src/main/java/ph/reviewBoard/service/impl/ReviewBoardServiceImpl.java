@@ -43,6 +43,26 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		boardDAO.updateReview(boardVo);
 		
 	}
+
+	@Override
+	public BoardVO beforeReview(BoardVO boardVo) throws Exception {
+		return boardDAO.beforeReview(boardVo);
+	}
+
+	@Override
+	public BoardVO afterReview(BoardVO boardVo) throws Exception {
+		return boardDAO.afterReview(boardVo);
+	}
+
+	@Override
+	public int maxReview() throws Exception {
+		return boardDAO.maxReview();
+	}
+
+	@Override
+	public int minReview() throws Exception {
+		return boardDAO.minReview();
+	}
 	
 	
 

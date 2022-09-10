@@ -47,6 +47,19 @@
 			})	
 
 	}
+
+	function beforeReview(){
+		var boardNo = $('#boardNo').val()
+		location.href='beforeReview.do?boardNo='+boardNo
+		
+	}
+	
+	function afterReview(){
+		var boardNo = $('#boardNo').val()
+		location.href='afterReview.do?boardNo='+boardNo
+	}
+			
+			
 </script>
 <title>Insert title here</title>
 </head>
@@ -61,10 +74,12 @@
 	System.out.println(userRole);
 %>
 
-글쓴사람 ${reviewBoard.memberId}
+글쓴사람 ${reviewBoard.memberId} <br>
 
-로그인한사람 ${memberId}
- 
+로그인한사람 ${memberId} <br>
+
+글번호 ${reviewBoard.boardNo}
+
             <h2>후기게시판</h2>
         </div>
         <br/>
@@ -100,6 +115,13 @@
         
         <div><a href="reviewBoardlist.do" >목록으로</a></div>
         <div><a href="main.do" >첫화면</a></div>
+        
+        <c:if test="${reviewBoard.boardNo!=minReview}">
+        	<input type="button" onclick="beforeReview()" value="이전글"/>
+        </c:if>
+        <c:if test="${reviewBoard.boardNo!=maxReview}">	
+        	<input type="button" onclick="afterReview()" value="다음글"/>
+        </c:if>
         
 		<c:if test="${reviewBoard.memberId==memberId}">
 		<div>

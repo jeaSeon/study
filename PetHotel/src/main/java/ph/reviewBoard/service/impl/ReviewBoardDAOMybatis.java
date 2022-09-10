@@ -41,4 +41,24 @@ public class ReviewBoardDAOMybatis extends EgovAbstractMapper implements ReviewB
 		
 	}
 
+	@Override
+	public BoardVO beforeReview(BoardVO boardVo) throws Exception {
+		return (BoardVO) selectOne("beforeReview", boardVo);
+	}
+
+	@Override
+	public BoardVO afterReview(BoardVO boardVo) throws Exception {
+		return (BoardVO) selectOne("afterReview", boardVo);
+	}
+
+	@Override
+	public int maxReview() throws Exception {
+		return selectOne("maxReview");
+	}
+
+	@Override
+	public int minReview() throws Exception {
+		return selectOne("minReview");
+	}
+
 }

@@ -109,13 +109,15 @@
         <!-- 수정에서 넘어오면 저장버튼 안보이게. -->
         <c:if test="${reviewBoard.boardNo==null}">
         <div>
-            <button  type="button" onclick="insert()" id="insert">저장</button>
+            <button type="button" onclick="insert()" id="insert">저장</button>
+            <button type="button" onclick="javscript:history.back()">취소</button>
          </div>
          </c:if>
         
         <c:if test="${reviewBoard.memberId==memberId}">
 	        <div>
 	            <button  type="button" onclick="update()" id="update">수정</button>
+	            <button type="button" onclick="javscript:history.back()">취소</button>
 	        </div>
          </c:if>
       

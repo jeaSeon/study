@@ -20,6 +20,7 @@ public class ReviewBoardController {
 	@Resource(name="reviewBoardService")
 	private ReviewBoardService boardService;
 	
+	
 	@RequestMapping(value="/write.do")
 	public String write(HttpSession session, HttpServletRequest request,Model model) {
 		String memberId=null;
@@ -29,7 +30,7 @@ public class ReviewBoardController {
 		model.addAttribute("memberId",memberId);
 		return "ReviewBoard/ReviewWriteForm";
 	}
-	
+
 	//글쓰기
 	@ResponseBody
 	@RequestMapping(value="/insertReviewboard.do", method=RequestMethod.GET)
@@ -54,7 +55,6 @@ public class ReviewBoardController {
 	}
 	
 	//조회 
-	//모델에 값 담아서 넘겨.? 리스트, 
 	@RequestMapping(value="/reviewBoardlist.do")
 	public String reviewBoardlist(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		//System.out.println("목록보기");
@@ -78,6 +78,8 @@ public class ReviewBoardController {
 		BoardVO reviewBoard=boardService.selectReview(boardVo);
 		model.addAttribute("reviewBoard",reviewBoard);
 		model.addAttribute("memberId",memberId);
+		model.addAttribute("minReview",boardService.minReview());
+		model.addAttribute("maxReview",boardService.maxReview());
 		return "ReviewBoard/reviewBoard";
 	}
 	
@@ -93,14 +95,13 @@ public class ReviewBoardController {
 	//수정
 	@RequestMapping(value="reviewUp.do")
 	public String reviewUp(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
-		BoardVO reviewBoard=boardService.selectReview(boardVo);
 		//System.out.println(boardVo);
 		String memberId=null;
 		session= request.getSession();
 		memberId=(String) session.getAttribute("SessionMemberId");
 		
 		model.addAttribute("memberId",memberId);
-		model.addAttribute("reviewBoard",reviewBoard);
+		model.addAttribute("reviewBoard",boardService.selectReview(boardVo));
 		//System.out.println(reviewBoard.toString());
 		return "ReviewBoard/ReviewWriteForm";
 	}
@@ -111,5 +112,35 @@ public class ReviewBoardController {
 		//System.out.println("넘어온 값"+boardVo.toString());
 		boardService.updateReview(boardVo);
 		return "ReviewBoard/reviewBoardlist";
+	}
+	
+	//이전글 이동
+	@RequestMapping(value="beforeReview.do")
+	public String reviewBefore(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		System.out.println("이전글 이동"+boardVo);
+		String memberId=null;
+		session= request.getSession();
+		memberId=(String) session.getAttribute("SessionMemberId");
+		model.addAttribute("reviewBoard",boardService.beforeReview(boardVo));
+		model.addAttribute("memberId",memberId);
+		model.addAttribute("minReview",boardService.minReview());
+		return "ReviewBoard/reviewBoard";
+
+	}
+	
+	//다음 글 이동
+	@RequestMapping(value="afterReview.do")
+	public String afterReview(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		//System.out.println("다음글 이동"+boardVo);
+		String memberId=null;
+		session= request.getSession();
+		memberId=(String) session.getAttribute("SessionMemberId");
+		
+		//System.out.println("다음글" + reviewBoard);
+		model.addAttribute("reviewBoard",boardService.afterReview(boardVo));
+		model.addAttribute("memberId",memberId);
+		model.addAttribute("maxReview",boardService.maxReview());
+		return "ReviewBoard/reviewBoard";
+
 	}
 }

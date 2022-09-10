@@ -13,5 +13,13 @@ public interface ReviewBoardDAO {
 	void deleteReview(BoardVO boardVo) throws Exception;
 	
 	void updateReview(BoardVO boardVo) throws Exception;
+	
+	BoardVO beforeReview(BoardVO boardVo) throws Exception;
+	
+	BoardVO afterReview(BoardVO boardVo) throws Exception;
+	
+	int maxReview() throws Exception;
+	
+	int minReview() throws Exception;
 
 }
