@@ -7,6 +7,28 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript">
+	function update(){
+		alert("수정")
+		var boardNoB=$('#boardNo').val();
+		var titleB = $('#title').val()
+		var contentB = $('#content').val();
+		alert(boardNoB)
+		$.ajax({
+			url: 'reviewUpdate.do',
+			type: 'GET',
+			data: {
+				boardNo:boardNoB,
+				title:titleB,
+				content:contentB,
+				},
+			datatype: 'JSON',
+			success: function (data) {
+					alert("게시글 수정 성공")
+					location.href='reviewBoardlist.do'
+			}
+		})
+	}
+
 	function insert() {
 		alert("하이")
 		var titleB = $('#title').val()
@@ -27,7 +49,7 @@
 					location.href='login.do'
 				} else {
 					alert("게시글 등록 성공")
-					location.href='list.do'
+					location.href='reviewBoardlist.do'
 				}
 			}
 		})			
@@ -54,8 +76,8 @@
             ${SessionMemberNickname}
         </div>
         <br/>
-        <input id="boardNo" name="boardNo" type="hidden" />
-        <input id="wdate" name="wdate" type="hidden" />
+        <input id="boardNo" value="${reviewBoard.boardNo}" type="hidden" />
+        <input id="wdate" name="wdate" value="${reviewBoard.wdate}" type="hidden" />
         <table class="table">
             <tr>
                 <th style="padding:13px 0 0 15px">게시판 선택</th>
@@ -67,19 +89,20 @@
                     </div>
                 </td>
             </tr>
+            <!-- 
             <tr>
-           		 <!-- ?의 의미는, 있으면 찍고 없으면 안찍고. -->
                 <th style="padding:13px 0 0 15px;">생성날짜</th>
-                <td><input name="wdate" type="text"readonly="readonly" /></td>
-            </tr>
+                <td><input name="wdate" type="text" readonly="readonly" /></td>
+            </tr> -->
+            
             <tr>
                 <th style="padding:13px 0 0 15px;">제목</th>
-                <td><input id="title" type="text" /></td>
+                <td><input id="title" type="text" value="${reviewBoard.title}"/></td>
             </tr>
             <tr>
                 <th style="padding:13px 0 0 15px;">내용</th>
                 <td><textarea id="content" maxlength="140" rows="7" style="height: 200px;"
-                ></textarea>
+                >${reviewBoard.content}</textarea>
                 </td>
             </tr>
 
@@ -89,7 +112,7 @@
         </div>
         <div >
             <button  type="button" onclick="insert()" id="insert">저장</button>
-            <button  type="button" id="update">수정</button>
+            <button  type="button" onclick="update()" id="update">수정</button>
             <button  type="button" id="delete">삭제</button>
         </div>
     </div>

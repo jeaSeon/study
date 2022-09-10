@@ -9,5 +9,9 @@ public interface ReviewBoardDAO {
 	List<BoardVO> selectReviewList(BoardVO boardVo) throws Exception;
 	
 	BoardVO selectReview(BoardVO boardVo) throws Exception;
+	
+	void deleteReview(BoardVO boardVo) throws Exception;
+	
+	void updateReview(BoardVO boardVo) throws Exception;
 
 }

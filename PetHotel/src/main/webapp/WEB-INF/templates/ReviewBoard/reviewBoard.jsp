@@ -5,6 +5,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	function updateReview(){
+		alert("수정시작")
+		var boardNo = $('#boardNo').val()
+		location.href='reviewUp.do?boardNo='+boardNo
+			/*  $.ajax({
+				url: 'reviewUp.do',
+				type: 'GET',
+				data: {
+					boardNo:boardNoB,
+					},
+				datatype: 'JSON',
+				success: function (data){
+					alert("이동이동")
+				}
+			})*/
+	}
+
+
+	function deleteReview(){
+		alert("삭제시작")
+		var boardNoB = $('#boardNo').val()
+		alert(boardNoB)
+			$.ajax({
+				url: 'deleteReview.do',
+				type: 'GET',
+				data: {
+					boardNo:boardNoB,
+					},
+				datatype: 'JSON',
+				success: function (data) {
+					/*  if(data == "no") {
+						alert("삭제 실패.")
+						location.href='login.do'
+					} else { */
+						alert("삭제성공")
+						location.href='reviewBoardlist.do'
+				}
+			})	
+
+	}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,11 +62,12 @@
 %>
 
  ${SessionMemberId}
+ ${userId}
  
             <h2>후기게시판</h2>
         </div>
         <br/>
-        <input id="boardNo" name="boardNo" type="hidden" />
+        <input id="boardNo" name="boardNo" value="${reviewBoard.boardNo}" type="hidden" />
         <input id="wdate" name="wdate" type="hidden" />
         <table border="1" cellpadding="0" cellspacing="0" width="800">
             <tr>
@@ -54,5 +98,12 @@
         </table>
         
         <div><a href="reviewBoardlist.do" >목록으로</a></div>
+        <div><a href="main.do" >첫화면</a></div>
+        
+		<!-- 글쓴사람이 지울 수 있게.. 수정하기 -->
+        <div>
+            <input type="button" onclick="updateReview()" value="수정">
+            <input type="button" onclick="deleteReview()" value="삭제">
+        </div>
 </body>
 </html>

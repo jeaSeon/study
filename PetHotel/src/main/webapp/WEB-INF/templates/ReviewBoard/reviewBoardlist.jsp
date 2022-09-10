@@ -62,6 +62,8 @@
 			</div>
 			</nav>	
 		</div>
+		
+		<input type="button" onclick="location.href='/PetHotel/write.do'" value="글쓰기">
 </div>
 </body>
 </html>

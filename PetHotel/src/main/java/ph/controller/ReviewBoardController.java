@@ -73,4 +73,30 @@ public class ReviewBoardController {
 		model.addAttribute("reviewBoard",reviewBoard);	
 		return "ReviewBoard/reviewBoard";
 	}
+	
+	//삭제
+	@RequestMapping(value="/deleteReview.do")
+	public String deleteReview(BoardVO boardVo) throws Exception {
+		System.out.println("딜리트시작");
+		System.out.println("딜리트넘버값"+boardVo.toString());
+		boardService.deleteReview(boardVo);
+		return "ReviewBoard/reviewBoard";
+	}
+	
+	//수정
+	@RequestMapping(value="reviewUp.do")
+	public String reviewUp(BoardVO boardVo, Model model) throws Exception {
+		BoardVO reviewBoard=boardService.selectReview(boardVo);
+		//System.out.println(boardVo);
+		model.addAttribute("reviewBoard",reviewBoard);
+		System.out.println(reviewBoard.toString());
+		return "ReviewBoard/ReviewWriteForm";
+	}
+	
+	@RequestMapping(value="reviewUpdate.do")
+	public String reviewUpdate(BoardVO boardVo) throws Exception {
+		System.out.println("넘어온 값"+boardVo.toString());
+		boardService.updateReview(boardVo);
+		return "ReviewBoard/reviewBoardlist";
+	}
 }

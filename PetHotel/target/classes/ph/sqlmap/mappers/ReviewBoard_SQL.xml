@@ -29,9 +29,19 @@
 	
 	
 	<select id="selectReview" resultMap="boardResult">
-		select boardType, wdate, memberId, memberNickname, title, content
+		select *
 		FROM board
 		WHERE boardNo=#{boardNo}
 	</select>
 	
+	<delete id="deleteReview">
+		DELETE from board
+		WHERE boardNo=#{boardNo}
+	</delete>
+	
+	
+	<update id="updateReview">
+		UPDATE board SET title=#{title}, content=#{content} 
+		WHERE boardNo=#{boardNo}
+	</update>
 </mapper>

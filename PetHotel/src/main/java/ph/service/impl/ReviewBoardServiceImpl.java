@@ -32,4 +32,18 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		return boardDAO.selectReview(boardVo);
 	}
 
+	@Override
+	public void deleteReview(BoardVO boardVo) throws Exception {
+		boardDAO.deleteReview(boardVo);
+		
+	}
+
+	@Override
+	public void updateReview(BoardVO boardVo) throws Exception {
+		boardDAO.updateReview(boardVo);
+		
+	}
+	
+	
+
 }

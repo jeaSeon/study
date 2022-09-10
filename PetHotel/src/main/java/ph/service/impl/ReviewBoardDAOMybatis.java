@@ -28,4 +28,17 @@ public class ReviewBoardDAOMybatis extends EgovAbstractMapper implements ReviewB
 		return (BoardVO) selectOne("selectReview", boardVo);
 	}
 
+	@Override
+	public void deleteReview(BoardVO boardVo) throws Exception {
+		delete("deleteReview",boardVo);
+		
+	}
+	
+	//게시글 수정
+	@Override
+	public void updateReview(BoardVO boardVo) throws Exception {
+		update("updateReview",boardVo);
+		
+	}
+
 }
