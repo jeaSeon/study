@@ -1,4 +1,4 @@
-package ph.service;
+package ph.reviewBoard.service;
 
 import java.util.Date;
 

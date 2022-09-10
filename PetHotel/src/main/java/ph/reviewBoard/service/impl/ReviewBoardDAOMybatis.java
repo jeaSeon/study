@@ -1,12 +1,12 @@
-package ph.service.impl;
+package ph.reviewBoard.service.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
-import ph.service.ReviewBoardDAO;
-import ph.service.BoardVO;
+import ph.reviewBoard.service.BoardVO;
+import ph.reviewBoard.service.ReviewBoardDAO;
 
 @Repository("reviewBoardDAOMybatis")
 public class ReviewBoardDAOMybatis extends EgovAbstractMapper implements ReviewBoardDAO{

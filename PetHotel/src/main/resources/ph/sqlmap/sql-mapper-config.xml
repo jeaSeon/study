@@ -4,6 +4,6 @@
 <configuration>  
     <typeAliases>
 		<typeAlias alias="members" type="ph.service.MembersVO"/>
-		<typeAlias alias="board" type="ph.service.BoardVO"/>
+		<typeAlias alias="board" type="ph.reviewBoard.service.BoardVO"/>
     </typeAliases>
 </configuration>

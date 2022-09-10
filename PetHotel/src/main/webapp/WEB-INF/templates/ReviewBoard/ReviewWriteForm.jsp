@@ -116,7 +116,6 @@
         <c:if test="${reviewBoard.memberId==memberId}">
 	        <div>
 	            <button  type="button" onclick="update()" id="update">수정</button>
-	            <button  type="button" id="delete">삭제</button>
 	        </div>
          </c:if>
       

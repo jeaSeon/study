@@ -1,4 +1,4 @@
-package ph.service.impl;
+package ph.reviewBoard.service.impl;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ph.service.ReviewBoardDAO;
-import ph.service.ReviewBoardService;
-import ph.service.BoardVO;
+import ph.reviewBoard.service.BoardVO;
+import ph.reviewBoard.service.ReviewBoardDAO;
+import ph.reviewBoard.service.ReviewBoardService;
 
 @Service("reviewBoardService")
 public class ReviewBoardServiceImpl implements ReviewBoardService{

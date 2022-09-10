@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ph.service.BoardVO;
+import ph.reviewBoard.service.BoardVO;
+import ph.reviewBoard.service.ReviewBoardService;
 import ph.service.MembersVO;
-import ph.service.ReviewBoardService;
 
 @Controller
 public class ReviewBoardController {

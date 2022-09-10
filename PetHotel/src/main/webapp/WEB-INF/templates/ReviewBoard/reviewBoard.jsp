@@ -104,6 +104,8 @@
 		<c:if test="${reviewBoard.memberId==memberId}">
 		<div>
             <input type="button" onclick="updateReview()" value="수정"/>
+            <input type="button" onclick="deleteReview()" value="삭제"/>
+            
         </div>
 		</c:if>
 
