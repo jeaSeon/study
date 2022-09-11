@@ -35,7 +35,7 @@ public class ReviewBoardController {
 		return "ReviewBoard/ReviewWriteForm";
 	}
 
-	//글쓰기
+	//리뷰 글쓰기
 	@ResponseBody
 	@RequestMapping(value="/insertReviewboard.do", method=RequestMethod.GET)
 	public String insertReviewBoard(BoardVO boardVO, MembersVO membersVO, HttpSession session, HttpServletRequest request) throws Exception {
@@ -58,6 +58,7 @@ public class ReviewBoardController {
 		return data;	
 	}
 	
+	//리뷰 검색
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap(){
 		Map<String, String> conditionMap=new HashMap<String, String>();
@@ -67,7 +68,7 @@ public class ReviewBoardController {
 	}
 	
 	
-	//조회 
+	//리뷰글 조회 
 	@RequestMapping(value="/reviewBoardlist.do")
 	public String reviewBoardlist(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		//System.out.println("목록보기");
@@ -112,7 +113,7 @@ public class ReviewBoardController {
 		return "ReviewBoard/reviewBoardlist";
 	}
 	
-	//1개조회
+	//리뷰글 1개조회
 	@RequestMapping(value="/reviewBoard.do")
 	public String reviewBoard(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		//System.out.println("리뷰보드 컨트롤러");
@@ -129,7 +130,7 @@ public class ReviewBoardController {
 		return "ReviewBoard/reviewBoard";
 	}
 	
-	//삭제
+	//리뷰글 삭제
 	@RequestMapping(value="/deleteReview.do")
 	public String deleteReview(BoardVO boardVo) throws Exception {
 		//System.out.println("딜리트시작");
@@ -138,7 +139,7 @@ public class ReviewBoardController {
 		return "ReviewBoard/reviewBoard";
 	}
 	
-	//수정
+	//수정페이지 이동
 	@RequestMapping(value="reviewUp.do")
 	public String reviewUp(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		//System.out.println(boardVo);

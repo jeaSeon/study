@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="totalReview" resultType="int">
-		select count(*) from board
+		select count(*) from board where boardType="후기게시판"
 	</select>
 	
 	<!-- 글 1개 조회 -->
