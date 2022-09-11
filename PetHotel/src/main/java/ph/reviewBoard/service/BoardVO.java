@@ -15,12 +15,28 @@ public class BoardVO {
 	private Date wdate;
 	private String boardType;
 	
+	//검색기능
+	private String searchCondition;
+	private String searchKeyword;
+	
+	
 	private String memberId;
 	private String memberNickname;
 	
 	private String employeeId;
 	private String employeeNickname;
 	private String employeeRole;
+	
 	private String reviewPicturePath;
+	
+	//페이징
+	private int viewPage = 1;
+	private int startIndex = 0;
+	private int endIndex = 10;
+	
+	private int pageList = 5;
+	private int firstPage = 0;
+	private int lastPage = 0;
+	
 
 }

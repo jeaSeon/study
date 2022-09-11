@@ -64,6 +64,11 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		return boardDAO.minReview();
 	}
 	
+	@Override
+	public int totalReview(BoardVO boardVo) throws Exception{
+		int result=boardDAO.totalReview(boardVo);
+		return result;
+	}
 	
 
 }

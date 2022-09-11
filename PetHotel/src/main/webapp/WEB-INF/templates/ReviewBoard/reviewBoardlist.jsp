@@ -24,6 +24,9 @@
 		<p>${memberId}님 안녕하세요</p>
 	</c:if>
 
+
+
+
   <div>
         <div >
             <h2>후기 게시글 목록</h2>
@@ -31,7 +34,27 @@
         <br/>
         <br/>
         <br/>
+
+        
         <div >
+        
+         <!-- 검색 -->
+		<form action="reviewBoardlist.do">
+		<table border="1" cellpadding="0" cellspacing="0" width="800">
+		<tr>
+			<td align="right">
+				<select name="searchCondition">
+					<c:forEach items="${conditionMap}" var="option">
+						<option value="${option.value}">${option.key }
+					</c:forEach>
+				</select>
+				<input name="searchKeyword" type="text"/>
+				<input type="submit" value="검색"/>
+			</td>
+		</tr>
+		</table>
+		</form>
+        
         		<!-- 테이블에 마우스를 올렸을 때 마우스 커서가 있는 행이 다른 색으로 변한다 -->
         		<table border="1" cellpadding="0" cellspacing="0" width="800">
         			<thead>
@@ -73,13 +96,13 @@
       <nav aria-label="Page navigation" style="text-align: center;">	
 			<div class="pagination" style="text-align: center">
 				<c:if test="${firstPage > pageList }">
-					<a class="changePage" href="list.do?viewPage=${firstPage - pageList}">[이전]</a>
+					<a class="changePage" href="reviewBoardlist.do?viewPage=${firstPage - pageList}">[이전]</a>
 				</c:if>	
 				<c:forEach var="i" begin="${firstPage}" end="${lastPage}">																
-					<a class="changePage" href="list.do?viewPage=${i}">[ ${i} ]</a>						 						
+					<a class="changePage" href="reviewBoardlist.do?viewPage=${i}">[ ${i} ]</a>						 						
 				</c:forEach>
 				<c:if test="${lastPage < totalPage}">
-					<a class="changePage" href="list.do?viewPage=${firstPage + pageList}">[다음]</a>
+					<a class="changePage" href="reviewBoardlist.do?viewPage=${firstPage + pageList}">[다음]</a>
 				</c:if>
 			</div>
 			</nav>	

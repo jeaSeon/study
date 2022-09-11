@@ -32,6 +32,7 @@ public class MembersDAOMybatis extends EgovAbstractMapper implements MembersDAO 
 		return result;
 	}
 	
+	
 	@Override
 	public void signUpMember(MembersVO membersVo) throws Exception {
 		insert("signUpMember", membersVo);

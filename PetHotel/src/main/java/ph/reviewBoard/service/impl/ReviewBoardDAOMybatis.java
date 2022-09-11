@@ -17,10 +17,19 @@ public class ReviewBoardDAOMybatis extends EgovAbstractMapper implements ReviewB
 		insert("insertReviewBoard",boardVO);
 		
 	}
+	
 
+	//글 리스트
 	@Override
 	public List<BoardVO> selectReviewList(BoardVO boardVo) throws Exception {
+		System.out.println("말바티스"+boardVo.toString());
 		return selectList("selectReviewList", boardVo);
+	}
+	
+	@Override
+	public int totalReview(BoardVO boardVo) throws Exception{
+		int result=selectOne("totalReview", boardVo);
+		return result;
 	}
 
 	@Override

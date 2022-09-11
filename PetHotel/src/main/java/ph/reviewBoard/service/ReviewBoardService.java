@@ -21,4 +21,6 @@ public interface ReviewBoardService {
 	int maxReview() throws Exception;
 	
 	int minReview() throws Exception;
+	
+	public int totalReview(BoardVO boardVo) throws Exception;
 }

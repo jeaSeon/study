@@ -1,11 +1,15 @@
 package ph.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,6 +58,15 @@ public class ReviewBoardController {
 		return data;	
 	}
 	
+	@ModelAttribute("conditionMap")
+	public Map<String, String> searchConditionMap(){
+		Map<String, String> conditionMap=new HashMap<String, String>();
+		conditionMap.put("제목","TITLE");
+		conditionMap.put("내용","CONTENT");
+		return conditionMap;
+	}
+	
+	
 	//조회 
 	@RequestMapping(value="/reviewBoardlist.do")
 	public String reviewBoardlist(BoardVO boardVo, Model model, HttpSession session, HttpServletRequest request) throws Exception {
@@ -61,8 +74,41 @@ public class ReviewBoardController {
 		String memberId=null;
 		session= request.getSession();
 		memberId=(String) session.getAttribute("SessionMemberId");
+		
+		int total=boardService.totalReview(boardVo);
+		
+		int totalPage=(int)Math.ceil((double)total/10);
+		
+		int pageList=boardVo.getPageList();
+		
+		int viewPage=boardVo.getViewPage();
+		
+		int firstPage = ((viewPage - 1) / pageList) * pageList + 1;
+		int lastPage = firstPage + pageList - 1;
+		if (lastPage > totalPage) {
+			lastPage = totalPage;
+		}
+		int startIndex = (viewPage - 1) * 10;
+		int endIndex = 10;
+		
+		boardVo.setStartIndex(startIndex);
+		boardVo.setEndIndex(endIndex);
+
+		boardVo.setPageList(pageList);
+		boardVo.setFirstPage(firstPage);
+		boardVo.setLastPage(lastPage);
+		
+		if(boardVo.getSearchCondition()==null) boardVo.setSearchCondition("TITLE");
+		if(boardVo.getSearchKeyword()==null) boardVo.setSearchKeyword("");
+		
 		model.addAttribute("memberId",memberId);
+		model.addAttribute("total", total);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("firstPage", firstPage);
+		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("reviewBoardList",boardService.selectReviewList(boardVo));
+		
 		return "ReviewBoard/reviewBoardlist";
 	}
 	
